@@ -2,24 +2,33 @@ package Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
     private WebDriver driver ;
 
     public HomePage(WebDriver driver ){
         this.driver=driver;
+        PageFactory.initElements(driver,this);
     }
 
-    private By lnkLogin = By.linkText("Login");
-    private By lnkEmpList = By.linkText("Employee List");
+    @FindBy(linkText = "Login")
+    private WebElement lnkLogin;
+
+    @FindBy(linkText = "Employee List")
+    private WebElement lnkEmpList;
 
     public LogInPage clickOnLoginPage(){
-        driver.findElement(lnkLogin).click();
+//        driver.findElement(lnkLogin).click();
+        lnkLogin.click();
         return  new LogInPage(driver);
     }
 
     public EmployeeListPage clickOnEmpList(){
-        driver.findElement(lnkEmpList).click();
+//        driver.findElement(lnkEmpList).click();
+        lnkEmpList.click();
         return  new EmployeeListPage(driver);
     }
 

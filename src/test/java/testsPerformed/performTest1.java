@@ -18,7 +18,7 @@ public class performTest1 {
         CreateEmpPage createEmpPage = employeeListPage.clickOnCreateEmp();
         createEmpPage.createEmployee("aditya","23000","34","aditya@xyz.com","Middle");
 
-
+        driver.close();
 
     }
 }

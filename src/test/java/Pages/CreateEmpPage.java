@@ -2,6 +2,9 @@ package Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 public class CreateEmpPage {
@@ -9,26 +12,38 @@ public class CreateEmpPage {
 
     public CreateEmpPage(WebDriver driver ){
         this.driver=driver;
+        PageFactory.initElements(driver, this);
     }
-    private By name = By.id("Name");
-    private By Salary = By.id("Salary");
-    private By DurationWorked = By.id("DurationWorked");
-    public  By gradeSelector = By.id("Grade");
-    private By Email = By.id("Email");
-    private By createBtn = By.cssSelector(".btn");
+    @FindBy(id = "Name")
+    private WebElement name;
+
+    @FindBy(id = "Salary")
+    private WebElement Salary;
+
+    @FindBy(id = "DurationWorked")
+    private WebElement DurationWorked ;
+
+    @FindBy(id = "Grade")
+    public  WebElement gradeSelector;
+
+    @FindBy(id = "Email")
+    private WebElement Email;
+
+    @FindBy(css = ".btn")
+    private WebElement createBtn ;
 
     public EmployeeListPage createEmployee(String empName, String salary, String Duration, String email , String visibleText ){
-        driver.findElement(name).sendKeys(empName);
-        driver.findElement(Salary).sendKeys(salary);
-        driver.findElement(DurationWorked).sendKeys(Duration);
+        name.sendKeys(empName);
+        Salary.sendKeys(salary);
+        DurationWorked.sendKeys(Duration);
         selectOptionsByVisibleText(gradeSelector, visibleText);
-        driver.findElement(Email).sendKeys(email);
-        driver.findElement(createBtn).click();
+        Email.sendKeys(email);
+        createBtn.click();
         return  new EmployeeListPage(driver);
     }
 
-    public void selectOptionsByVisibleText(By locator, String visibleText){
-        new Select(driver.findElement(locator)).selectByVisibleText(visibleText);
+    public void selectOptionsByVisibleText(WebElement locator, String visibleText){
+        new Select(locator).selectByVisibleText(visibleText);
     }
 
 }
